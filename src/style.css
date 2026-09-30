@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Press+Start+2P&display=swap');
 
-:root { --ink: #171733; --muted: #6d6d83; --paper: #f5f1df; --cream: #fff9e7; --pink: #ff4f70; --orange: #ff9f31; --yellow: #f6cf4a; --green: #40c886; --blue: #4a85ee; --border: #222148; }
+:root { --ink: #0d1b36; --muted: #59667d; --paper: #f4f0df; --cream: #fff4c6; --pink: #f05a43; --orange: #e9aa2e; --yellow: #ffd34f; --green: #2aa05a; --blue: #5fd4e5; --border: #17294b; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; color: var(--ink); background: var(--paper); font-family: 'DM Mono', monospace; }
