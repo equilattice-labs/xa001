@@ -73,9 +73,9 @@ function confirmTrade() {
     </div>
 
     <header class="topbar">
-      <a class="brand" href="#top" aria-label="Oddspark home">
+      <a class="brand" href="#top" aria-label="PulseGrid home">
         <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-        <span class="brand-word">ODDSPARK</span>
+        <span class="brand-word">PULSEGRID</span>
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a class="active" href="#markets">Markets</a>
@@ -94,15 +94,15 @@ function confirmTrade() {
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
           <div class="eyebrow"><span class="blink-dot"></span> LIVE ON ROBINHOOD CHAIN</div>
-          <h1 id="hero-title">PREDICT THE<br /><span>ODD</span> OUTCOME.</h1>
-          <p>Trade the world's weirdest questions. Built for fast moves, tiny fees, and big <strong>1UPs.</strong></p>
+          <h1 id="hero-title">READ THE<br /><span>PULSE</span>.</h1>
+          <p>Read the pulse. Make your call. Trade live questions with fast moves, tiny fees, and a sharper view of the crowd.</p>
           <div class="hero-buttons">
             <a class="primary-cta" href="#markets">Explore markets <span>-&gt;</span></a>
             <button class="text-cta" type="button" @click="walletOpen = true">Get started <span>-&gt;</span></button>
           </div>
         </div>
         <div class="hero-console" aria-label="Market stats">
-          <div class="console-top"><span>ODDSPARK // TERMINAL 01</span><span class="signal">* ONLINE</span></div>
+          <div class="console-top"><span>PULSEGRID // MARKET DESK</span><span class="signal">* ONLINE</span></div>
           <div class="console-screen">
             <div class="screen-line"><span>MARKETS LIVE</span><strong>128</strong></div>
             <div class="screen-line"><span>24H VOLUME</span><strong>$2.4M</strong></div>
@@ -115,7 +115,7 @@ function confirmTrade() {
 
       <section id="markets" class="markets-section" aria-labelledby="markets-title">
         <div class="section-head">
-          <div><div class="section-kicker">// CHOOSE YOUR LEVEL</div><h2 id="markets-title">MARKET MAP</h2></div>
+          <div><div class="section-kicker">// FIND YOUR SIGNAL</div><h2 id="markets-title">MARKET PULSE</h2></div>
           <div class="live-count"><span></span> 128 markets live</div>
         </div>
         <div class="market-controls">
@@ -139,16 +139,16 @@ function confirmTrade() {
       </section>
 
       <section id="portfolio" class="bottom-band">
-        <div class="ticker-title"><span class="coin-stack">$</span><div><span class="section-kicker">// YOUR RUN</span><h2>PORTFOLIO</h2></div></div>
+        <div class="ticker-title"><span class="coin-stack">$</span><div><span class="section-kicker">// YOUR SIGNALS</span><h2>PORTFOLIO</h2></div></div>
         <div class="portfolio-stat"><span>AVAILABLE BALANCE</span><strong>{{ connected ? '$1,240.00' : '---' }}</strong></div>
         <div class="portfolio-stat"><span>OPEN POSITIONS</span><strong>{{ connected ? '03' : '00' }}</strong></div>
         <button class="outline-button" type="button" @click="walletOpen = true">{{ connected ? 'View portfolio ->' : 'Connect to view ->' }}</button>
       </section>
 
-      <section id="how-it-works" class="how-section"><div class="section-kicker">// THREE EASY MOVES</div><h2>PLAY THE ODDS.</h2><div class="steps"><div><b>01</b><h3>Pick a question</h3><p>Find a market where your read is stronger than the crowd.</p></div><div><b>02</b><h3>Choose YES or NO</h3><p>Back your call with USDC on Robinhood Chain.</p></div><div><b>03</b><h3>Collect your 1UP</h3><p>When the outcome lands, winners split the pool.</p></div></div></section>
+      <section id="how-it-works" class="how-section"><div class="section-kicker">// THREE EASY MOVES</div><h2>MAKE YOUR CALL.</h2><div class="steps"><div><b>01</b><h3>Read a question</h3><p>Find a market where your view is stronger than the crowd.</p></div><div><b>02</b><h3>Choose YES or NO</h3><p>Back your call with USDC on Robinhood Chain.</p></div><div><b>03</b><h3>Track the pulse</h3><p>When the outcome lands, winners split the pool.</p></div></div></section>
     </main>
 
-    <footer class="footer"><span>ODDSPARK / 2025</span><span>BUILT ON <a :href="contractExplorerUrl" target="_blank" rel="noreferrer"><b>ROBINHOOD CHAIN</b></a> // {{ contractAddress.slice(0, 6) }}...{{ contractAddress.slice(-4) }}</span><span>SEE THE SIGNAL. MAKE YOUR CALL.</span></footer>
+    <footer class="footer"><span>PULSEGRID / 2025</span><span>BUILT ON <a :href="contractExplorerUrl" target="_blank" rel="noreferrer"><b>ROBINHOOD CHAIN</b></a> // {{ contractAddress.slice(0, 6) }}...{{ contractAddress.slice(-4) }}</span><span>READ THE PULSE. MAKE YOUR CALL.</span></footer>
 
     <div v-if="selectedMarket" class="modal-backdrop" @click.self="closeTrade">
       <section class="trade-modal" role="dialog" aria-modal="true" aria-labelledby="trade-title">
@@ -163,7 +163,7 @@ function confirmTrade() {
       </section>
     </div>
 
-    <div v-if="walletOpen" class="modal-backdrop" @click.self="walletOpen = false"><section class="wallet-modal" role="dialog" aria-modal="true" aria-labelledby="wallet-title"><button class="close-button" type="button" aria-label="Close wallet dialog" @click="walletOpen = false">X</button><div class="wallet-pixel">*</div><div class="modal-kicker">ROBINHOOD CHAIN</div><h2 id="wallet-title">CONNECT TO PLAY</h2><p>Use a compatible wallet to trade markets with USDC.</p><button class="confirm-button" type="button" @click="connectWallet">Connect wallet <span>-&gt;</span></button><p class="modal-note">By connecting, you agree to the Oddspark terms.</p></section></div>
+    <div v-if="walletOpen" class="modal-backdrop" @click.self="walletOpen = false"><section class="wallet-modal" role="dialog" aria-modal="true" aria-labelledby="wallet-title"><button class="close-button" type="button" aria-label="Close wallet dialog" @click="walletOpen = false">X</button><div class="wallet-pixel">*</div><div class="modal-kicker">ROBINHOOD CHAIN</div><h2 id="wallet-title">CONNECT TO PLAY</h2><p>Use a compatible wallet to trade markets with USDC.</p><button class="confirm-button" type="button" @click="connectWallet">Connect wallet <span>-&gt;</span></button><p class="modal-note">By connecting, you agree to the PulseGrid terms.</p></section></div>
     <transition name="toast"><div v-if="toast" class="toast">{{ toast }}</div></transition>
   </div>
 </template>

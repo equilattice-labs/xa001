@@ -1,5 +1,5 @@
 {
-  "name": "oddspark-markets",
+  "name": "pulsegrid-markets",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -12,6 +12,5 @@
     "@vitejs/plugin-vue": "latest",
     "vite": "latest",
     "vue": "latest"
-  },
-  "devDependencies": {}
+  }
 }

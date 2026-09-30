@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PulseGrid social asset renderer</title>
+  <style>
+    :root { color-scheme: light; background: #f5f5f0; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; overflow: hidden; }
+    body { width: 1200px; height: 675px; font-family: Inter, Arial, sans-serif; }
+    svg { display: block; width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+<svg id="art" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PulseGrid social graphic"></svg>
+<script>
+  const palette = { ink: '#171917', paper: '#f5f5f0', white: '#ffffff', muted: '#72756f', line: '#daddd3', acid: '#c6f15b', acidDark: '#4d6c0a', coral: '#ff765f', green: '#17824b', red: '#c5493d' }
+  const icon = (x, y, size, tile = palette.acid, ink = palette.ink) => `
+    <g transform="translate(${x} ${y})">
+      <rect width="${size}" height="${size}" rx="${size * .27}" fill="${tile}"/>
+      <path d="M${size*.27} ${size*.28}h${size*.18}v${size*.18}h-${size*.18}z M${size*.55} ${size*.28}h${size*.18}v${size*.18}h-${size*.18}z M${size*.27} ${size*.56}h${size*.18}v${size*.18}h-${size*.18}z" fill="${ink}"/>
+      <circle cx="${size*.64}" cy="${size*.65}" r="${size*.09}" fill="${palette.coral}"/>
+    </g>`
+  const wordmark = (x, y, size, color = palette.ink) => `<text x="${x}" y="${y}" fill="${color}" font-family="Inter, Arial, sans-serif" font-size="${size}" font-weight="850" letter-spacing="0">PULSEGRID</text>`
+  const label = (x, y, value, color = palette.muted, size = 14) => `<text x="${x}" y="${y}" fill="${color}" font-family="Inter, Arial, sans-serif" font-size="${size}" font-weight="700" letter-spacing="${size*.11}">${value}</text>`
+  const shell = (w, h, inner, color = palette.paper) => `<svg id="art" xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="PulseGrid social graphic">
+    <defs>
+      <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M36 0H0V36" fill="none" stroke="${palette.ink}" stroke-opacity=".055" stroke-width="1"/></pattern>
+      <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${palette.acid}" stop-opacity=".42"/><stop offset="1" stop-color="${palette.coral}" stop-opacity=".08"/></linearGradient>
+    </defs>
+    <rect width="${w}" height="${h}" fill="${color}"/>${inner}</svg>`
+  const marketPanel = (x, y, w, h, scale = 1) => {
+    const rows = [
+      ['BTC above 100k by July?', '68%', '+8.2%', palette.green],
+      ['ETH daily fees overtake BTC?', '21%', '+4.7%', palette.green],
+      ['New summer game release?', '43%', '−2.4%', palette.red],
+    ]
+    const rowH = 64 * scale
+    return `<g transform="translate(${x} ${y})">
+      <rect width="${w}" height="${h}" rx="22" fill="${palette.white}" stroke="${palette.line}"/>
+      <rect x="0" y="0" width="${w}" height="56" rx="22" fill="${palette.ink}"/>
+      <path d="M0 34h${w}v22H0z" fill="${palette.ink}"/>
+      ${label(22, 36, 'LIVE MARKETS', palette.white, 11 * scale)}
+      ${rows.map(([name, odds, change, move], i) => `<g transform="translate(0 ${56 + i*rowH})">
+        <path d="M0 ${rowH}H${w}" stroke="${palette.line}"/>
+        <circle cx="28" cy="${rowH/2}" r="7" fill="${i===0?palette.acid:palette.coral}"/>
+        <text x="48" y="${rowH/2+5}" fill="${palette.ink}" font-family="Inter,Arial,sans-serif" font-size="${13*scale}" font-weight="650">${name}</text>
+        <text x="${w-120}" y="${rowH/2+5}" fill="${palette.ink}" font-family="Inter,Arial,sans-serif" font-size="${16*scale}" font-weight="800">${odds}</text>
+        <text x="${w-68}" y="${rowH/2+4}" fill="${move}" font-family="Inter,Arial,sans-serif" font-size="${11*scale}" font-weight="750">${change}</text>
+      </g>`).join('')}
+    </g>`
+  }
+  const views = {
+    avatar: () => {
+      const w=400,h=400
+      return shell(w,h,`<rect width="400" height="400" fill="${palette.ink}"/>
+        <circle cx="346" cy="48" r="112" fill="${palette.acid}"/>
+        <circle cx="346" cy="48" r="80" fill="${palette.ink}"/>
+        <circle cx="346" cy="48" r="48" fill="${palette.acid}"/>
+        <path d="M0 294H400V400H0z" fill="#20231f"/>
+        ${icon(40,46,58)}${wordmark(40,190,42,palette.white)}
+        ${label(42,224,'PREDICTION MARKETS', '#aeb3a8',11)}
+        <path d="M40 260H360" stroke="#3b4038" stroke-width="2"/>
+        <circle cx="53" cy="326" r="7" fill="${palette.acid}"/>
+        ${label(72,331,'BUILT ON ROBINHOOD CHAIN',palette.white,10)}
+        <text x="40" y="375" fill="#aeb3a8" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600">READ THE PULSE. MAKE YOUR CALL.</text>`,palette.ink)
+    },
+    banner: () => {
+      const w=1500,h=500
+      return shell(w,h,`<rect width="1500" height="500" fill="url(#grid)"/>
+        <circle cx="1320" cy="58" r="242" fill="url(#wash)"/>
+        <rect x="74" y="70" width="1352" height="360" rx="34" fill="${palette.white}"/>
+        ${icon(120,108,54)}
+        ${label(192,139,'ON-CHAIN PREDICTION MARKETS',palette.muted,12)}
+        ${wordmark(120,246,70)}
+        <text x="120" y="300" fill="${palette.ink}" font-family="Inter,Arial,sans-serif" font-size="25" font-weight="650">Read the pulse. Make your call.</text>
+        <circle cx="132" cy="357" r="7" fill="${palette.green}"/>
+        ${label(150,362,'LIVE ON ROBINHOOD CHAIN',palette.muted,12)}
+        <g transform="translate(1004 105)">
+          <rect width="356" height="286" rx="28" fill="${palette.ink}"/>
+          ${label(28,38,'MARKET MOMENTUM', '#c1c5bc',10)}
+          <path d="M35 222 87 180l44 25 51-88 44 28 52-90" fill="none" stroke="${palette.acid}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M35 222 87 180l44 25 51-88 44 28 52-90v180H35z" fill="${palette.acid}" opacity=".12"/>
+          <circle cx="278" cy="55" r="8" fill="${palette.coral}"/>
+          <path d="M35 238H320M35 184H320M35 130H320" stroke="#ffffff" stroke-opacity=".12"/>
+        </g>`,palette.paper)
+    },
+    hero: () => {
+      const w=1200,h=675
+      return shell(w,h,`<rect width="1200" height="675" fill="url(#grid)"/>
+        <path d="M776 0H1200V675H706c116-124 89-276 28-369C682 213 705 80 776 0Z" fill="${palette.acid}"/>
+        ${icon(82,74,42)}${wordmark(140,106,30)}
+        ${label(82,204,'ON-CHAIN PREDICTION MARKETS',palette.muted,13)}
+        <text x="82" y="302" fill="${palette.ink}" font-family="Inter,Arial,sans-serif" font-size="90" font-weight="850" letter-spacing="0">READ THE</text>
+        <text x="82" y="390" fill="${palette.ink}" font-family="Inter,Arial,sans-serif" font-size="90" font-weight="850" letter-spacing="0">PULSE.</text>
+        <text x="86" y="446" fill="${palette.muted}" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="600">Read the crowd. Make your call.</text>
+        <rect x="82" y="488" width="230" height="54" rx="27" fill="${palette.ink}"/>
+        <text x="116" y="522" fill="${palette.white}" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="750">EXPLORE MARKETS  →</text>
+        ${marketPanel(686,147,440,356,.9)}
+        <text x="686" y="560" fill="${palette.ink}" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="800" letter-spacing="1.4">BUILT ON ROBINHOOD CHAIN</text>
+        <text x="82" y="620" fill="${palette.muted}" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="1.1">PULSEGRID  /  READ THE PULSE. MAKE YOUR CALL.</text>`,palette.paper)
+    },
+    markets: () => {
+      const w=1200,h=675
+      return shell(w,h,`<rect width="1200" height="675" fill="url(#grid)"/>
+        ${icon(70,50,40)}${wordmark(125,79,27)}
+        ${label(70,146,'THE MARKET PULSE',palette.muted,12)}
+        <text x="70" y="214" fill="${palette.ink}" font-family="Inter,Arial,sans-serif" font-size="50" font-weight="850" letter-spacing="0">Follow what moves.</text>
+        <text x="72" y="250" fill="${palette.muted}" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="550">A clear view of questions shaping the crowd.</text>
+        ${marketPanel(70,292,1060,286,1.02)}
+        <rect x="70" y="606" width="9" height="9" rx="4.5" fill="${palette.green}"/>
+        ${label(91,615,'LIVE ON ROBINHOOD CHAIN',palette.muted,11)}
+        ${label(934,615,'READ THE PULSE. MAKE YOUR CALL.',palette.ink,11)}`,palette.paper)
+    },
+  }
+  const kind = new URLSearchParams(location.search).get('kind') || 'avatar'
+  const svg = views[kind] ? views[kind]() : views.avatar()
+  document.querySelector('#art').outerHTML = svg
+  const rendered = document.querySelector('svg')
+  document.body.style.width = `${rendered.viewBox.baseVal.width}px`
+  document.body.style.height = `${rendered.viewBox.baseVal.height}px`
+</script>
+</body>
+</html>
